@@ -5,17 +5,15 @@
 #include <time.h>
 #include<filesystem>
 
-/// Вывод горизонтальной линии для отделения разделов интерфейса.
+
 void Borders() {
 	cout << "-----------------------------------------------------------------------------------------------------" << endl;
 }
 
-/// Вывод текстовой задачи.
 void Task() {
 	cout << "Arrange array in ascending order.\n";
 }
 
-/// Вывод меню выбора метода ввода данных.
 void MenuForInput() {
 	cout
 		<< "1. Console input" << endl
@@ -24,23 +22,17 @@ void MenuForInput() {
 		<< "4. Exit" << endl << endl;
 }
 
-/// Вывод меню сохранения результатов.
 void SavingMenu() {
 	cout << "1. Save results to a file" << endl
 		<< "2. Return to a main menu" << endl << endl;
 }
 
-/// Вывод меню выбора сохранения массива.
 void WitchOneSave() {
 	cout << "1. Save original array" << endl
 		<< "2. Save sorted array" << endl
 		<< "3.Back to the previous menu" << endl << endl;
 }
 
-/// <summary>
-/// Функция для вывода элементов массива в консоль.
-/// </summary>
-/// <param name="arr">Ссылка на вектор, содержащий элементы массива.</param>
 void PrintArr(vector<int>& arr) {
 
 	for (int i = 0; i < arr.size(); i++) {
@@ -50,11 +42,6 @@ void PrintArr(vector<int>& arr) {
 	cout << "\n";
 }
 
-/// <summary>
-/// Функция для ввода элементов массива с клавиатуры.
-/// </summary>
-/// <param name="arr">Ссылка на вектор, в который будут сохранены введенные элементы.</param>
-/// <param name="sizeOfArr">Ссылка на переменную, содержащую размер массива.</param>
 void ConcoleInput(vector<int>& arr, int& sizeOfArr) {
 
 	// Присвоение вектору указанного размера и заполнение его нулями.
@@ -67,114 +54,52 @@ void ConcoleInput(vector<int>& arr, int& sizeOfArr) {
 		// Получение значения от пользователя с использованием функции GetValue.
 		arr[i] = static_cast<int>(GetValue("Enter #" + to_string(i + 1) + " element of array: "));
 	}
-
 }
 
-/// <summary>
-/// Функция для чтения массива из файла.
-/// </summary>
-/// <param name="arr">Ссылка на вектор, в который будут сохранены элементы массива.</param>
-/// <param name="name">Имя файла для чтения данных.</param>
-/// <returns>Возвращает true, если файл успешно прочитан, иначе false.</returns>
 bool FileInput(vector<int>& arr, string name) {
 	// Открытие файла для чтения.
 	ifstream fin;
 	fin.open(name);
+	int value = 0;
+	int sizeOfArr = 0;
 
 	// Проверка, успешно ли открыт файл.
 	if (!fin.is_open()) {
 		cout << "\nError. You cant open the file!\n" << endl;
 		return false;
 	}
-
 	else {
-		string str;
-		int tmp = 0;
-
-		// Считывание первой строки из файла.
-		getline(fin, str);
-
-		// Инициализация переменной для подсчета пробелов.
-		int spaces = 0;
-
-		// Цикл для анализа каждого символа в строке.
-		for (int i = 0; i < str.length(); i++) {
-
-			// Удаление пробелов в конце строки.
-			while (str[str.length() - 1] == ' ') {
-				str.erase(str.length() - 1, 1);
-			}
-
-			// Подсчет пробелов в строке.
-			if (str[i] == ' ') {
-				spaces++;
-			}
-
-		}
-
-		// Определение размера массива как количество пробелов плюс один.
-		int sizeOfArr = spaces + 1;
-
-		// Инициализация вектора заданного размера и заполнение его нулями.
-		arr.assign(sizeOfArr, 0);
-
-		// Закрытие файла и повторное открытие для сброса указателя на начало файла.
-		fin.close();
-		fin.open(name);
 
 		// Проверка на пустоту файла.
-		if (str.empty()) {
+		if (fin.eof()) {
 			cout << "\nFail empty!\n\n";
 			return false;
 		}
+		else {
 
-		// Проверка, содержит ли файл только цифры и пробелы.
-		while (getline(fin, str)) {
-
-			for (int i = 0; i < str.length(); i++) {
-
-				// Проверка, является ли текущий символ пробелом или знаком минуса.
-				if (str[i] == 32 || str[i] == 45) {
-					continue;   // Если да, переходим к следующей итерации цикла.
-				}
-
-				// Проверка, является ли текущий символ цифрой.
-				else if (str[i] >= 48 && str[i] <= 57) {
-					continue;
-				}
-
-				// Если текущий символ не пробел, не знак минуса и не цифра, выводится сообщение об ошибке.
-				else {
-					cout << "\nInvalid arguments used in file" << endl;
-					cout << "Edit your file or choose another one!\n\n";
-					return false;
-				}
-
+			while (!fin.eof()) {
+				fin >> value;
+				sizeOfArr++;
 			}
 
+			arr.assign(sizeOfArr, 0);
+			fin.close();
+			fin.open(name);
+
+			// Заполнение вектора значениями из файла.
+			for (int i = 0; i < sizeOfArr; i++) {
+				fin >> value;
+				arr[i] = value;
+			}
+
+			fin.close();
+			return true;
 		}
-
-		fin.close();
-		fin.open(name);
-
-		// Заполнение вектора значениями из файла.
-		for (int i = 0; i < sizeOfArr; i++) {
-			fin >> tmp;
-			arr[i] = tmp;
-		}
-
-		fin.close();
-		return true;
 	}
 }
 
-/// <summary>
-/// Функция для заполнения массива случайными значениями.
-/// </summary>
-/// <param name="arr">Ссылка на вектор, который будет заполнен.</param>
-/// <param name="sizeOfArr">Ссылка на переменную, содержащую размер массива.</param>
 void RandomInput(vector<int>& arr, int& sizeOfArr) {
-	arr.assign(sizeOfArr, 0);    // Присвоение вектору указанного размера.
+	arr.assign(sizeOfArr, 0);    // Присвоение вектору указанного размера и заполение его нулями.
 	srand(static_cast<unsigned int>(time(NULL)));    // Инициализация генератора случайных чисел.
 	int min = -100;
 	int max = 100;
@@ -183,27 +108,8 @@ void RandomInput(vector<int>& arr, int& sizeOfArr) {
 	for (int i = 0; i < sizeOfArr; i++) {
 		arr[i] = min + rand() % (max - min + 1);
 	}
-
 }
 
-/// <summary>
-/// Функция для сортировки массива с использованием конкретного метода сортировки.
-/// </summary>
-/// <param name="sort">Указатель на объект, реализующий интерфейс ISort.</param>
-/// <param name="arr">Ссылка на вектор, который будет отсортирован.</param>
-/// <returns>Возвращает исходный массив.</returns>
-vector<int> SortWithCertainMethod(shared_ptr<ISort> sort, vector<int>& arr) {
-	cout << sort->NameOfSort();   // Вывод названия метода сортировки.
-	vector<int> res = arr;   // Создание копии массива для сортировки.
-	sort->Sort(res);   // Вызов метода сортировки.
-	PrintArr(res);   // Вывод отсортированного массива.
-	return arr;
-}
-
-/// <summary>
-/// Функция для сохранения исходного массива в файл.
-/// </summary>
-/// <param name="arr">Ссылка на вектор, содержащий исходный массив.</param>
 void SaveOriginalArr(vector<int>& arr) {
 	// Переменные для работы с файлом и задания имени файла.
 	ofstream fout;
@@ -243,11 +149,9 @@ void SaveOriginalArr(vector<int>& arr) {
 			}
 
 		}
-
 		else {
 			setting = 0;
 		}
-
 	}
 
 	// Открытие файла для записи.
@@ -257,7 +161,6 @@ void SaveOriginalArr(vector<int>& arr) {
 	if (!fout.is_open()) {
 		cout << "\nError. You cant open the file!\n" << endl;
 	}
-
 	else {
 
 		// Запись исходного массива в файл с отступом.
@@ -269,10 +172,6 @@ void SaveOriginalArr(vector<int>& arr) {
 
 }
 
-/// <summary>
-/// Функция для сохранения отсортированного массива в файл.
-/// </summary>
-/// <param name="arr">Ссылка на вектор, содержащий исходный массив.</param>
 void SaveSortedArr(vector<int>& arr) {
 	// Создание копии массива и выбор алгоритма сортировки.
 	vector<int> res = arr;
@@ -317,7 +216,6 @@ void SaveSortedArr(vector<int>& arr) {
 			}
 
 		}
-
 		else {
 			getNameOfFile = false;
 		}
@@ -329,7 +227,6 @@ void SaveSortedArr(vector<int>& arr) {
 	if (!fout.is_open()) {
 		cout << "\nError. You cant open the file!\n" << endl;
 	}
-
 	else {
 
 		for (int i = 0; i < res.size(); i++) {

@@ -3,7 +3,6 @@
 #include <fstream>
 #include "getinfo.h"
 
-
 /// <summary>
 /// Главная функция, в которой реализовано все пользовательское меню с выбором заполнения массива.
 /// </summary>
@@ -15,34 +14,39 @@ int main() {
 
     // Вектор для хранения массива и размер массива
     vector<int> arr;
+    vector<int> res;
     int sizeOfArr = 0;
+    QuickSort sort;
 
     // Вывод границ и задачи программы
     Borders();
     Task();
     Borders();
 
-    // Переменная для хранения имени файла
-    string name = "";
-
-    // Поток для записи в файл
-    fstream fout;
 
     // Основной цикл программы
     while (actionMenuForInput) {
         // Вывод меню выбора способа ввода
         MenuForInput();
         actionMenuForInput = static_cast<int>(GetInt("Choose an option:  "));
+        // Переменная для хранения имени файла
+        string name = "";
 
+        // Поток для записи в файл
+        fstream fout;
         switch (actionMenuForInput) {
+
         case MenuForInput::console:
             // Ввод массива с консоли
             sizeOfArr = static_cast<int>(GetInt("Enter array size :  "));
             cout << "\n";
-            ConcoleInput(arr, sizeOfArr);
+            ConcoleInput(arr, sizeOfArr);  //ввод массива с клавиатуры'
+            res = arr;
             cout << "\nOriginal array\n";
-            PrintArr(arr);
-            SortWithCertainMethod(make_shared<QuickSort>(), arr);
+            PrintArr(arr);                 //вывод элементов массива в консоль
+            cout << sort.NameOfSort();     // Вывод названия метода сортировки.
+            sort.Sort(res);   // Вызов метода сортировки.
+            PrintArr(res);   // Вывод отсортированного массива.
 
             // Вложенный цикл для выбора опции сохранения
             while (actionSavingMenu) {
@@ -62,10 +66,10 @@ int main() {
                             actionWitchOneSave = 0;
                             break;
                         case WitchOneSave::sorted:
-                            SaveSortedArr(arr);
+                            SaveSortedArr(res);
                             actionWitchOneSave = 0;
                             break;
-                        case WitchOneSave::back3:
+                        case WitchOneSave::backToSaving:  
                             actionWitchOneSave = 0;
                             break;
                         default:
@@ -78,9 +82,11 @@ int main() {
                     actionWitchOneSave = 1;
                     actionSavingMenu = 0;
                     break;
-                case SavingMenu::back2:
+
+                case SavingMenu::backToInput:
                     actionSavingMenu = 0;
                     break;
+
                 default:
                     cout << "Incorect option! Try enter again!" << endl;
                     cin >> actionSavingMenu;
@@ -90,17 +96,21 @@ int main() {
 
             actionSavingMenu = 1;
             break;
+
         case MenuForInput::file:
             // Ввод массива из файла
+
             cout << "Enter the name of the file: ";
             cin >> name;
 
             if (FileInput(arr, name)) {
                 cout << "\nOriginal array\n";
+                res = arr;
                 PrintArr(arr);
-                SortWithCertainMethod(make_shared<QuickSort>(), arr);
+                cout << sort.NameOfSort();   // Вывод названия метода сортировки.
+                sort.Sort(res);   // Вызов метода сортировки.
+                PrintArr(res);   // Вывод отсортированного массива.
             }
-
             else {
                 actionSavingMenu = 0;
             }
@@ -123,10 +133,10 @@ int main() {
                             actionWitchOneSave = 0;
                             break;
                         case WitchOneSave::sorted:
-                            SaveSortedArr(arr);
+                            SaveSortedArr(res);
                             actionWitchOneSave = 0;
                             break;
-                        case WitchOneSave::back3:
+                        case WitchOneSave::backToSaving:
                             actionWitchOneSave = 0;
                             break;
                         default:
@@ -139,7 +149,7 @@ int main() {
                     actionWitchOneSave = 1;
                     actionSavingMenu = 0;
                     break;
-                case SavingMenu::back2:
+                case SavingMenu::backToInput:
                     actionSavingMenu = 0;
                     break;
                 default:
@@ -156,9 +166,12 @@ int main() {
             sizeOfArr = static_cast<int>(GetInt("Enter array size :  "));
             cout << "\n";
             RandomInput(arr, sizeOfArr);
+            res = arr;
             cout << "\nOriginal array\n";
             PrintArr(arr);
-            SortWithCertainMethod(make_shared<QuickSort>(), arr);
+            cout << sort.NameOfSort();   // Вывод названия метода сортировки.
+            sort.Sort(res);   // Вызов метода сортировки.
+            PrintArr(res);   // Вывод отсортированного массива.
 
             // Вложенный цикл для выбора опции сохранения
             while (actionSavingMenu) {
@@ -178,10 +191,10 @@ int main() {
                             actionWitchOneSave = 0;
                             break;
                         case WitchOneSave::sorted:
-                            SaveSortedArr(arr);
+                            SaveSortedArr(res);
                             actionWitchOneSave = 0;
                             break;
-                        case WitchOneSave::back3:
+                        case WitchOneSave::backToSaving:
                             actionWitchOneSave = 0;
                             break;
                         default:
@@ -194,7 +207,8 @@ int main() {
                     actionWitchOneSave = 1;
                     actionSavingMenu = 0;
                     break;
-                case SavingMenu::back2:
+
+                case SavingMenu::backToInput:
                     actionSavingMenu = 0;
                     break;
                 default:
@@ -206,6 +220,7 @@ int main() {
 
             actionSavingMenu = 1;
             break;
+
         case MenuForInput::quit:
             cout << "Programm finished its work!" << endl;
             return EXIT_SUCCESS;
