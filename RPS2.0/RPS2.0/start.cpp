@@ -45,7 +45,7 @@ int main() {
             cout << "\nOriginal array\n";
             PrintArr(arr);                 //вывод элементов массива в консоль
             cout << sort.NameOfSort();     // Вывод названия метода сортировки.
-            sort.Sort(res);   // Вызов метода сортировки.
+            res = sort.Qsort(res);   // Вызов метода сортировки.
             PrintArr(res);   // Вывод отсортированного массива.
 
             // Вложенный цикл для выбора опции сохранения
@@ -69,7 +69,7 @@ int main() {
                             SaveSortedArr(res);
                             actionWitchOneSave = 0;
                             break;
-                        case WitchOneSave::backToSaving:  
+                        case WitchOneSave::backToSaving:
                             actionWitchOneSave = 0;
                             break;
                         default:
@@ -108,7 +108,7 @@ int main() {
                 res = arr;
                 PrintArr(arr);
                 cout << sort.NameOfSort();   // Вывод названия метода сортировки.
-                sort.Sort(res);   // Вызов метода сортировки.
+                res = sort.Qsort(res);   // Вызов метода сортировки.
                 PrintArr(res);   // Вывод отсортированного массива.
             }
             else {
@@ -170,7 +170,7 @@ int main() {
             cout << "\nOriginal array\n";
             PrintArr(arr);
             cout << sort.NameOfSort();   // Вывод названия метода сортировки.
-            sort.Sort(res);   // Вызов метода сортировки.
+            res = sort.Qsort(res);   // Вызов метода сортировки.
             PrintArr(res);   // Вывод отсортированного массива.
 
             // Вложенный цикл для выбора опции сохранения

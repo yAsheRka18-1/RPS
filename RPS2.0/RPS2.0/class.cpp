@@ -12,43 +12,32 @@ bool QuickSort::Compare(int a, int b) {
     return a > b;
 }
 
-void QuickSort::Qsort(vector<int>& arr, int left, int right) {
-    int i = left;
-    int j = right;
-    // Выбор опорного элемента в качестве среднего элемента массива
-    int pivot = arr[(static_cast<vector<int, allocator<int>>::size_type>(left) + right) / 2];
-
-    while (i <= j) {
-
-        while (Compare(pivot, arr[i])) {
-            i++;
-        }
-
-        while (Compare(arr[j], pivot)) {
-            j--;
-        }
-
-        if (i <= j) {
-            // Обмен элементов и изменение индексов
-            Permutations(arr, i, j);
-            i++;
-            j--;
-        }
+vector<int> QuickSort::Qsort(vector<int>& arr) {
+    if (arr.size() < 2) {
+        return arr;
     }
+    else {
+        int pivot = arr[arr.size() / 2];
+        vector<int> leftPart;
+        vector<int> rightPart;
+        int pivot_counter = 0;
+        for (int i = 0; i < arr.size(); i++) {
+            if (arr[i] == pivot) {
+                pivot_counter++;
+                continue;
+            }
 
-    // Рекурсивная сортировка подмассивов
+            if (arr[i] < pivot) { leftPart.push_back(arr[i]); }
+            else { rightPart.push_back(arr[i]); }
 
-    if (left < j) {
-        Qsort(arr, left, j);
+
+        }
+        leftPart = Qsort(leftPart);
+        rightPart = Qsort(rightPart);
+        vector <int> res(leftPart.begin(), leftPart.end());
+        res.insert(res.end(), pivot_counter, pivot);
+        res.insert(res.end(), rightPart.begin(), rightPart.end());
+        return res;
+
     }
-
-    if (i < right) {
-        Qsort(arr, i, right);
-    }
-}
-
-void QuickSort::Sort(vector<int>& arr) {
-    Qsort(arr, 0, static_cast<int>(arr.size()) - 1);  //arr - ссылка на вектор для сортировки,
-                                                      // 0 - индекс начала сортировки(индекс первого элемента в векторе),
-                                                      //static_cast<int>(arr.size()) - 1 - индекс конца сортировки
 }

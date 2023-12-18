@@ -71,4 +71,3 @@ void SaveOriginalArr(vector<int>& arr);
 /// </summary>
 /// <param name="arr">—сылка на вектор, содержащий исходный массив.</param>
 void SaveSortedArr(vector<int>& arr);
-

@@ -176,7 +176,7 @@ void SaveSortedArr(vector<int>& arr) {
 	// Создание копии массива и выбор алгоритма сортировки.
 	vector<int> res = arr;
 	QuickSort sort;
-	sort.Sort(res);
+	sort.Qsort(res);
 
 	// Открытие файла для записи.
 	ofstream fout;

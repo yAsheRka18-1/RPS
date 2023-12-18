@@ -38,14 +38,7 @@ public:
     /// <summary>
     /// Реализует алгоритм быстрой сортировки (Quick Sort).
     /// </summary>
-    /// <param name="arr">Массив, который требуется отсортировать.</param>
-    /// <param name="left">Индекс начала подмассива.</param>
-    /// <param name="right">Индекс конца подмассива.</param>
-    void Qsort(vector<int>& arr, int left, int right);
-
-    /// <summary>
-    /// Сортирует переданный массив с использованием алгоритма Quick Sort.
-    /// </summary>
-    /// <param name="arr">Массив, который требуется отсортировать.</param>
-    void Sort(vector<int>& arr);
+    /// <param name="arr"></param>
+    /// <returns></returns>
+    vector<int> Qsort(vector<int>& arr);
 };
