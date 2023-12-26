@@ -1,0 +1,3 @@
+C:\Users\kater\OneDrive\Рабочий стол\техноложка\рпс\RPS_3\RPS_3\x64\Debug\RPS_3.vcxproj.AssemblyReference.cache
+C:\Users\kater\OneDrive\Рабочий стол\техноложка\рпс\RPS_3\RPS_3\x64\Debug\RPS3.MainScreen.resources
+C:\Users\kater\OneDrive\Рабочий стол\техноложка\рпс\RPS_3\RPS_3\x64\Debug\RPS_3.vcxproj.GenerateResource.cache
