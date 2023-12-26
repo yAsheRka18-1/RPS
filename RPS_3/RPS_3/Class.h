@@ -1,5 +1,5 @@
 #pragma once
-#include <vector>
+
 
 using namespace System;
 using namespace System::ComponentModel;
@@ -10,17 +10,44 @@ using namespace System::Drawing;
 using namespace Data;
 using namespace Data::SqlClient;
 
-
-// Определение конкретного класса QuickSort
-ref class QuickSort {
+ref class ClassArrays
+{
 public:
-    // деструктор для правильной очистки
-    ~QuickSort() {};
+	ClassArrays();
 
-    /// <summary>
-    /// Реализует алгоритм быстрой сортировки (Quick Sort).
-    /// </summary>
-    /// <param name="arr"></param>
-    /// <returns></returns>
-    std::vector<int> Qsort(std::vector<int> arr);
+	static int idArray;
+	static property int IDArray
+	{
+		int get() {
+			return idArray;
+		}
+		void set(int value) {
+			idArray = value;
+		}
+	}
+
+	static String^ arrayValues;
+	static property String^ ArrayValues
+	{
+		String^ get() {
+			return arrayValues;
+		}
+		void set(String^ value) {
+			arrayValues = value;
+		}
+	}
+
+	static bool sortingStatus;
+	static property int SortingStatus
+	{
+		int get() {
+			return sortingStatus;
+		}
+		void set(int value) {
+			sortingStatus = value;
+		}
+	}
+
+
 };
+

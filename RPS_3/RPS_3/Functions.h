@@ -17,15 +17,14 @@ ref class Functions
 {
 public:
 	Functions();
-	SqlConnection^ conn;  // Объект подключения к базе данных
-	SqlConnectionStringBuilder^ connStringBuilder;  // Строка подключения к базе данных
-	void ConnectToDB();  // Метод для установки соединения с базой данных
+	SqlConnection^ conn;
+	SqlConnectionStringBuilder^ connStringBuilder;
+	void ConnectToDB();
 public:
 	void RandomInput(std::vector<int>& arr, int& sizeOfArr);
-	void Insert(ClassArrays^ a);  // Метод для вставки новой записи в базу данных
-	void InsertTest(ClassArrays^ a);
+	void Insert(ClassArrays^ a, String^ dataBase);
 	void DeleteTest();
-	ListBox::ObjectCollection^ FillComboBox();  // Метод для заполнения ComboBox данными из базы данных
+	ListBox::ObjectCollection^ FillComboBox();
 	void SelectTest();
-	void Update(ClassArrays^ aOld, ClassArrays^ aNew);  // Метод для обновления записи в базе данных
+	void Update(ClassArrays^ aOld, ClassArrays^ aNew);
 };

@@ -16,11 +16,11 @@ std::vector<int> QuickSort::Qsort(std::vector<int> arr) {
                 continue;
             }
 
-            if (arr[i] < pivot) { 
-                leftPart.push_back(arr[i]); 
+            if (arr[i] < pivot) {
+                leftPart.push_back(arr[i]);
             }
-            else { 
-                rightPart.push_back(arr[i]); 
+            else {
+                rightPart.push_back(arr[i]);
             }
         }
         leftPart = Qsort(leftPart);

@@ -25,6 +25,9 @@ namespace RPS3 {
 
 	private: System::Windows::Forms::Label^ labelForTests3;
 
+
+
+
 	private: System::Windows::Forms::Label^ labelForPattern;
 
 
@@ -67,7 +70,7 @@ namespace RPS3 {
 	private: System::Windows::Forms::Button^ Tests;
 	private: System::Windows::Forms::Label^ labelForTests1;
 
-	private: System::Windows::Forms::Timer^ timer;
+
 
 	private: System::ComponentModel::IContainer^ components;
 
@@ -86,7 +89,6 @@ namespace RPS3 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->components = (gcnew System::ComponentModel::Container());
 			this->exitButton = (gcnew System::Windows::Forms::Button());
 			this->textBoxForArray = (gcnew System::Windows::Forms::TextBox());
 			this->buttonForInsert = (gcnew System::Windows::Forms::Button());
@@ -103,7 +105,6 @@ namespace RPS3 {
 			this->arrSize = (gcnew System::Windows::Forms::TextBox());
 			this->Tests = (gcnew System::Windows::Forms::Button());
 			this->labelForTests1 = (gcnew System::Windows::Forms::Label());
-			this->timer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->labelForArrSize = (gcnew System::Windows::Forms::Label());
 			this->labelForTests2 = (gcnew System::Windows::Forms::Label());
 			this->labelForTests3 = (gcnew System::Windows::Forms::Label());
@@ -271,7 +272,7 @@ namespace RPS3 {
 			// labelForTests2
 			// 
 			this->labelForTests2->AutoSize = true;
-			this->labelForTests2->Location = System::Drawing::Point(427, 207);
+			this->labelForTests2->Location = System::Drawing::Point(427, 178);
 			this->labelForTests2->Name = L"labelForTests2";
 			this->labelForTests2->Size = System::Drawing::Size(210, 52);
 			this->labelForTests2->TabIndex = 19;
@@ -281,7 +282,7 @@ namespace RPS3 {
 			// labelForTests3
 			// 
 			this->labelForTests3->AutoSize = true;
-			this->labelForTests3->Location = System::Drawing::Point(427, 308);
+			this->labelForTests3->Location = System::Drawing::Point(427, 253);
 			this->labelForTests3->Name = L"labelForTests3";
 			this->labelForTests3->Size = System::Drawing::Size(216, 52);
 			this->labelForTests3->TabIndex = 20;
@@ -334,62 +335,61 @@ namespace RPS3 {
 	private: System::Void exitButton_Click(System::Object^ sender, System::EventArgs^ e) {
 		Application::Exit();
 	}
-	/// <summary>
-	/// Добавление массива в базу данных при нажатии соответсвующей кнопки
-	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
-	/// <returns></returns>
+		   /// <summary>
+		   /// Добавление массива в базу данных при нажатии соответсвующей кнопки
+		   /// </summary>
+		   /// <param name="sender"></param>
+		   /// <param name="e"></param>
+		   /// <returns></returns>
 	private: System::Void buttonForInsert_Click(System::Object^ sender, System::EventArgs^ e);
-	/// <summary>
-	/// Получение массивов из базы данных в выпадающий список при нажатии соответсвующей кнопки
-	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
-	/// <returns></returns>
+		   /// <summary>
+		   /// Получение массивов из базы данных в выпадающий список при нажатии соответсвующей кнопки
+		   /// </summary>
+		   /// <param name="sender"></param>
+		   /// <param name="e"></param>
+		   /// <returns></returns>
 	private: System::Void getArraysFromDB_Click(System::Object^ sender, System::EventArgs^ e);
-	/// <summary>
-	/// Отправить введенный массив из текстового поля в поле для редактирования массива и его сортировки
-	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
-	/// <returns></returns>
+		   /// <summary>
+		   /// Отправить введенный массив из текстового поля в поле для редактирования массива и его сортировки
+		   /// </summary>
+		   /// <param name="sender"></param>
+		   /// <param name="e"></param>
+		   /// <returns></returns>
 	private: System::Void SelectArray_Click(System::Object^ sender, System::EventArgs^ e);
-	/// <summary>
-	/// Функция сортировки массива, котороый готов к обработке
-	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
-	/// <returns></returns>
+		   /// <summary>
+		   /// Функция сортировки массива, котороый готов к обработке
+		   /// </summary>
+		   /// <param name="sender"></param>
+		   /// <param name="e"></param>
+		   /// <returns></returns>
 	private: System::Void SortArray_Click(System::Object^ sender, System::EventArgs^ e);
-	/// <summary>
-	///  Отправить выбранный массив из выпадающего списка в поле для редактирования массива и его сортировки
-	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
-	/// <returns></returns>
+		   /// <summary>
+		   ///  Отправить выбранный массив из выпадающего списка в поле для редактирования массива и его сортировки
+		   /// </summary>
+		   /// <param name="sender"></param>
+		   /// <param name="e"></param>
+		   /// <returns></returns>
 	private: System::Void EnterArray_Click(System::Object^ sender, System::EventArgs^ e);
-	/// <summary>
-	/// Функция для обновления данных массива в базе данных
-	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
-	/// <returns></returns>
+		   /// <summary>
+		   /// Функция для обновления данных массива в базе данных
+		   /// </summary>
+		   /// <param name="sender"></param>
+		   /// <param name="e"></param>
+		   /// <returns></returns>
 	private: System::Void EditArray_Click(System::Object^ sender, System::EventArgs^ e);
-	/// <summary>
-	/// Функция для рандомной генерации массива
-	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
-	/// <returns></returns>
+		   /// <summary>
+		   /// Функция для рандомной генерации массива
+		   /// </summary>
+		   /// <param name="sender"></param>
+		   /// <param name="e"></param>
+		   /// <returns></returns>
 	private: System::Void randomInput_Click(System::Object^ sender, System::EventArgs^ e);
-	/// <summary>
-	/// Функция запуска модульных тестов
-	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
-	/// <returns></returns>
+		   /// <summary>
+		   /// Функция запуска модульных тестов
+		   /// </summary>
+		   /// <param name="sender"></param>
+		   /// <param name="e"></param>
+		   /// <returns></returns>
 	private: System::Void Tests_Click(System::Object^ sender, System::EventArgs^ e);
-};
+	};
 }
-	
